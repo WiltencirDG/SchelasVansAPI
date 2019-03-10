@@ -1,16 +1,21 @@
-Pure CSS Layout Examples
-========================
+# Schelas Vans
 
-Layout examples using [Pure CSS][pure] compiled from the [pure-site][] project.
+## O Projeto
+```
+O SchelasVans é um gerenciador de frotas de vans.
 
-[pure]: http://purecss.io/
-[pure-site]: https://github.com/pure-css/pure-site
+O Projeto está sendo desenvolvido para o TCC pela
+Universidade Tuiuti do Paraná
+```
+
+### Repositório
+```
+Este repositório irá servir como o Backend da aplicação principal.
+```
 
 
-License
--------
-
-This software is free to use under the zLib license.
-See the [zLib][] license for more information.
-
-[zLib]: http://www.zlib.net/zlib_license.html
+### Grupo
+```
+Wiltencir D Garcia - Fullstack
+Bruno Teixeira dos Santos - Frontend
+```
