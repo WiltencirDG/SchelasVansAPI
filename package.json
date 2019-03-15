@@ -1,0 +1,23 @@
+{
+  "name": "schelasvansapi",
+  "version": "1.0.0",
+  "description": "```\r O SchelasVans é um gerenciador de frotas de vans.",
+  "main": "api.js",
+  "dependencies": {
+    "mssql": "^5.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WiltencirDG/SchelasVansAPI.git"
+  },
+  "author": "Wiltencir D Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WiltencirDG/SchelasVansAPI/issues"
+  },
+  "homepage": "https://github.com/WiltencirDG/SchelasVansAPI#readme"
+}
