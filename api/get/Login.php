@@ -13,18 +13,18 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         $result = $stmt->execute();
 
         if ($result){
-            echo json_encode(true);
+            echo json_encode('{"Data":{true}');
         }else{
-            echo json_encode(false);
+            echo json_encode('{"Data":{false}');
         }
 
         $db->mysql->close();
         
     } else {
-        echo json_encode(false);
+        echo json_encode('{"Data":{false}');
     }
 }else{
-    echo json_encode(false);
+    echo json_encode('{"Data":{false}');
 }
 
 ?>
