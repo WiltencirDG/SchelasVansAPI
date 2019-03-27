@@ -16,7 +16,6 @@ if ($stmt = $db->mysql->prepare($query)) {
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
             $arr[] = $row;
         }
-        echo json_encode($arr,JSON_UNESCAPED_UNICODE);
     }else{
         $arr[] = 'false';
     }
@@ -26,5 +25,5 @@ if ($stmt = $db->mysql->prepare($query)) {
 } else {
     $arr[] = 'false';
 }
-echo json_encode($arr);
+echo json_encode($arr,JSON_UNESCAPED_UNICODE);
 ?>
