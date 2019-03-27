@@ -1,8 +1,8 @@
 <?php
-DEFINE('DB_USER', 'schelasvansapi');
+DEFINE('DB_USER', 'id9086420_schelasvans');
 DEFINE('DB_PASS', 'brubinho');
 DEFINE('DB_HOST', 'localhost');
-DEFINE('DB_NAME', 'schelasvansapi');
+DEFINE('DB_NAME', 'id9086420_schelasvans');
 
 Class Db
 {
