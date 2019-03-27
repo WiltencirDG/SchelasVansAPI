@@ -1,9 +1,9 @@
 <?php
 
-require '../../db/Db.php';
+require '../../Db/Db.php';
 
 
-if($_POST['email'] && $_POST['password']){
+if(isset($_POST['email']) && isset($_POST['password'])){
     $db = new Db();
 
     $query = "SELECT UsuarioEmail, UsuarioSenha FROM Usuario WHERE UsuarioEmail = ? and UsuarioSenha = ?";
@@ -13,18 +13,18 @@ if($_POST['email'] && $_POST['password']){
         $result = $stmt->execute();
 
         if ($result){
-            return json_encode(true);
+            echo json_encode(true);
         }else{
-            return json_encode(false);
+            echo json_encode(false);
         }
 
         $db->mysql->close();
         
     } else {
-        return json_encode(false);
+        echo json_encode(false);
     }
 }else{
-    return json_encode(false);
+    echo json_encode(false);
 }
 
 ?>
