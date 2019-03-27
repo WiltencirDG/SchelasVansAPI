@@ -2,6 +2,7 @@
 
 require '../../Db/Db.php';
 
+$arr = [];
 
 if(isset($_POST['email']) && isset($_POST['password'])){
     $db = new Db();
@@ -13,18 +14,19 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         $result = $stmt->execute();
 
         if ($result){
-            echo json_encode('{"Data":{true}');
+            $arr[] = 'true';
+            
         }else{
-            echo json_encode('{"Data":{false}');
+            $arr[] = 'false';
         }
 
         $db->mysql->close();
         
     } else {
-        echo json_encode('{"Data":{false}');
+        $arr[] = 'false';
     }
 }else{
-    echo json_encode('{"Data":{false}');
+    $arr[] = 'false';
 }
-
+echo json_encode($arr,JSON_UNESCAPED_UNICODE);
 ?>
