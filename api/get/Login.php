@@ -2,31 +2,39 @@
 
 require '../../Db/Db.php';
 
-$arr = [];
-
 if(isset($_POST['email']) && isset($_POST['password'])){
+    
     $db = new Db();
-
-    $query = "SELECT UsuarioEmail, UsuarioSenha FROM Usuario WHERE UsuarioEmail = ? and UsuarioSenha = ?";
+    
+    $email = $_POST['email'];
+    $pass  = $_POST['password'];
+    $pass = crypt($pass,"wilt");
+    
+    $query = "SELECT `UsuarioEmail`, `UsuarioSenha` FROM `Usuario` WHERE `UsuarioEmail` = ? and `UsuarioSenha` = ?";
 
     if ($stmt = $db->mysql->prepare($query)) {
-        $stmt->bind_param('ss', $_POST['email'], crypt($_POST['password']));
+        $stmt->bind_param('ss', $email, $pass);
         $result = $stmt->execute();
-
-        if ($result){
-            $arr[] = 'true';
-            
+        $stmt->store_result();
+        $stmt->fetch();
+        $count = $stmt->num_rows();
+        
+        if ($count == 1){
+            $arr = "true";
         }else{
-            $arr[] = 'false';
+            $arr = "false";
         }
-
+        
         $db->mysql->close();
         
     } else {
-        $arr[] = 'false';
+        $arr = "false";
     }
 }else{
-    $arr[] = 'false';
+    $arr = "false";
+    
 }
-echo json_encode($arr,JSON_UNESCAPED_UNICODE);
+
+echo $arr;
+
 ?>

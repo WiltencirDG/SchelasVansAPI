@@ -3,19 +3,18 @@
 require '../../Db/Db.php';
 
 $arr;
+$id;
 
-if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['username'])){
+if(isset($_POST['id'])){
+    
     $db = new Db();
     
-    $email = $_POST['email'];
-    $pass  = $_POST['password'];
-    $pass = crypt($pass,"wilt");
-    $username = $_POST['username'];
+    $id = $_POST['id'];
     
-    $query = "INSERT INTO `Usuario`(`UsuarioEmail`, `UsuarioNome`, `UsuarioSenha`) VALUES (?,?,?)";
-
+    $query = "DELETE FROM `Passageiro` WHERE `PassageiroId` = ?";
+    
     if ($stmt = $db->mysql->prepare($query)) {
-        $stmt->bind_param('sss', $email, $username, $pass);
+        $stmt->bind_param('i', $id);
         $result = $stmt->execute();
         
         if ($result){
@@ -31,7 +30,6 @@ if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['username
     }
 }else{
     $arr = "false";
-    
 }
 
 echo json_encode($arr);

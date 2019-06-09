@@ -4,10 +4,11 @@ require '../../Db/Db.php';
 
 $db = new Db();
 
+
 if(isset($_GET['id'])){
-    $query = "SELECT * FROM Passageiro WHERE PassageiroId = ".$_GET['id'];
+    $query = "SELECT * FROM Veiculo WHERE VeiculoId = ".$_GET['id'];
 }else{
-    $query = "SELECT * FROM Passageiro";    
+    $query = "SELECT * FROM Veiculo";   
 }
 
 

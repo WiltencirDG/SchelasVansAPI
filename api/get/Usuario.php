@@ -1,26 +1,22 @@
 <?php
 
-require '../../Db/Db.php';
+require '../../db/Db.php';
 $db = new Db();
 
-$arr = [];
-
-$query = "SELECT * FROM Usuario WHERE UsuarioId = ?";
+$query = "SELECT * FROM Usuario";
 
 if ($stmt = $db->mysql->prepare($query)) {
-    $stmt->bind_param(i,$_POST["UsuarioId"]);
-
     $result = $stmt->execute();
     if ($result){
-        $arr[] = $result->fetch_array(MYSQLI_ASSOC);
+        return json_encode($result->fetch_array(MYSQLI_ASSOC));
     }else{
-        $arr[] = 'false';
+        return json_encode(false);
     }
 
     $db->mysql->close();
     
 } else {
-    $arr[] = 'false';
+    return json_encode(false);
 }
-echo json_encode($arr,JSON_UNESCAPED_UNICODE);
+
 ?>

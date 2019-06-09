@@ -4,11 +4,9 @@ require '../../Db/Db.php';
 
 $db = new Db();
 
-if(isset($_GET['id'])){
-    $query = "SELECT * FROM Passageiro WHERE PassageiroId = ".$_GET['id'];
-}else{
-    $query = "SELECT * FROM Passageiro";    
-}
+
+$query = "SELECT * FROM Passageiro WHERE PassageiroId NOT IN (SELECT PassageiroId FROM passageiroVeiculo)";    
+
 
 
 
