@@ -27,11 +27,20 @@ if(isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['phone']) && 
     
     $id+=1;
     
+    $cityquery = "SELECT `CidadeId` FROM `Cidade` WHERE `CidadeNome` = ".'"'.$cidade.'"'." LIMIT 1";
+    
+    $stmt = $db->mysql->prepare($cityquery);
+    $result = $db->mysql->query($cityquery);
+    $aux = $result->fetch_array(MYSQLI_ASSOC);
+            
+    $cidadeId = $aux["CidadeId"]; 
+    
+    
     $query = "INSERT INTO `Passageiro`(`PassageiroId`,`PassageiroNome`, `PassageiroEmail`, `PassageiroFone`, `PassageiroLogradouro`, `PassageiroNum`, `PassageiroBairro`, `PassageiroCidade`) VALUES (?,?,?,?,?,?,?,?)";
     
     
     if ($stmt = $db->mysql->prepare($query)) {
-        $stmt->bind_param('issssssi', $id, $nome, $email, $phone, $address, $number, $bairro, $cidade);
+        $stmt->bind_param('issssssi', $id, $nome, $email, $phone, $address, $number, $bairro, $cidadeId);
         $result = $stmt->execute();
         
         if ($result){

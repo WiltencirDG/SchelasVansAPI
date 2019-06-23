@@ -8,7 +8,8 @@ $passIds = [];
 $veicId;
 $dests = [];
 
-if(isset($_POST['destinos']) && isset($_POST["placa"])){
+if(isset($_POST['destinos']) && isset($_POST['placa'])){
+    
     $destinos = str_replace("[","",$_POST['destinos']);
     $destinos = str_replace("]","",$destinos);
     
@@ -17,17 +18,8 @@ if(isset($_POST['destinos']) && isset($_POST["placa"])){
     $placa = substr($_POST["placa"],0,7);
     $placa = '"'.$placa.'"';
     
-    $query = "SELECT PassageiroId FROM Passageiro WHERE PassageiroEmail IN (".$emails.")";
-    
-    $stmt = $db->mysql->prepare($query);
-    
-    if ($result = $db->mysql->query($query)) {
-        while ($row = $result->fetch_assoc()) {
-           array_push($passIds,$row["PassageiroId"]);
-        }
-    }
-    
     $query = "SELECT VeiculoId FROM Veiculo WHERE VeiculoPlaca = ".$placa;
+    print($query);
     $stmt = $db->mysql->prepare($query);
     $result = $db->mysql->query($query);
     $veic = $result->fetch_array(MYSQLI_ASSOC);
@@ -38,12 +30,14 @@ if(isset($_POST['destinos']) && isset($_POST["placa"])){
 $query = "INSERT INTO veiculoDestino(VeiculoId, DestinoId) VALUES";
 
 foreach($dests as $destid) {
+    
     if($destid != ''){
         $query = $query . " (". $veicId . ',' . $destid . "),";
     }
 }
 
 $query = rtrim($query,",");
+print($query);
 $arr = [];
 
 if ($stmt = $db->mysql->prepare($query)) {

@@ -25,11 +25,20 @@ if(isset($_POST['desc']) && isset($_POST['rua']) && isset($_POST['number']) && i
     
     $id+=1;
     
+    $cityquery = "SELECT `CidadeId` FROM `Cidade` WHERE `CidadeNome` = ".'"'.$cidade.'"'." LIMIT 1";
+    
+    $stmt = $db->mysql->prepare($cityquery);
+    $result = $db->mysql->query($cityquery);
+    $aux = $result->fetch_array(MYSQLI_ASSOC);
+            
+    $cidadeId = $aux["CidadeId"];
+    
+    
     $query = "INSERT INTO `Destino`(`DestinoId`,`DestinoDesc`, `DestinoLogradouro`, `DestinoNum`, `DestinoBairro`, `DestinoCidade`) VALUES (?,?,?,?,?,?)";
     
     
     if ($stmt = $db->mysql->prepare($query)) {
-        $stmt->bind_param('issssi', $id, $desc, $rua, $number, $bairro, $cidade);
+        $stmt->bind_param('issssi', $id, $desc, $rua, $number, $bairro, $cidadeId);
         $result = $stmt->execute();
         
         if ($result){

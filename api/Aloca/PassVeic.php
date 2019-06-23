@@ -33,21 +33,32 @@ if(isset($_POST['emails']) && isset($_POST["placa"])){
 }
 
 $query = "INSERT INTO passageiroVeiculo(PassageiroId, VeiculoId) VALUES";
+$query2 = "INSERT INTO Checklist(PassageiroId, VeiculoId, isSelected) VALUES";
 
 foreach($passIds as $passid) {
     if($passid != ''){
         $query = $query . " (". $passid . ',' . $veicId . "),";
+        $query2 = $query2 . " (". $passid . ',' . $veicId . ", false),";
     }
 }
 
 $query = rtrim($query,",");
+$query2 = rtrim($query2,",");
 $arr = [];
 
 if ($stmt = $db->mysql->prepare($query)) {
     $result = $db->mysql->query($query);
     if ($result){
-        $arr[] = 'true';
-        
+        if ($stmt = $db->mysql->prepare($query2)) {
+            $result = $db->mysql->query($query2);
+            if ($result){
+                $arr[] = 'true';
+            }else{
+                $arr[] = 'false';
+            }
+        }else {
+            $arr[] = 'false';
+        }
     }else{
         $arr[] = 'false';
     }

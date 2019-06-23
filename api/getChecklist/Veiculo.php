@@ -4,11 +4,14 @@ require '../../Db/Db.php';
 
 $db = new Db();
 
-$query = "SELECT 
- 	a.*,  SUM(b.VeiculoId) actualCap
-FROM Veiculo a 
-LEFT JOIN passageiroVeiculo b ON b.VeiculoId = a.VeiculoId 
-GROUP BY a.VeiculoId";   
+
+if(isset($_GET['id'])){
+    //$query = "SELECT * FROM Veiculo WHERE VeiculoId = ".$_GET['id'];
+}else{
+    $query = "SELECT a.VeiculoId, b.VeiculoPlaca, b.VeiculoCor, b.VeiculoModelo, b.VeiculoMarca, b.VeiculoCapacidade FROM Checklist a JOIN Veiculo b on b.VeiculoId = a.VeiculoId GROUP BY a.VeiculoId";   
+}
+
+
 
 $arr = [];
 
@@ -18,9 +21,6 @@ if ($stmt = $db->mysql->prepare($query)) {
     
     if ($result){
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
-            if($row["actualCap"] != null){
-                $row["VeiculoCapacidade"] = $row["VeiculoCapacidade"] - $row["actualCap"];    
-            }
             $arr[] = $row;
         }
         
